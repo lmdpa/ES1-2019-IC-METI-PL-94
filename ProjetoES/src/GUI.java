@@ -3,6 +3,8 @@
 import javax.swing.JFrame;
 import javax.swing.JTable;
 import javax.swing.JButton;
+import javax.swing.JComboBox;
+
 import java.awt.BorderLayout;
 import java.awt.Desktop;
 import java.awt.event.ActionListener;
@@ -11,7 +13,7 @@ import java.io.IOException;
 import java.awt.event.ActionEvent;
 import java.awt.Font;
 
-public class ProjetoES {
+public class GUI {
 
 	private JFrame frame;
 
@@ -22,7 +24,7 @@ public class ProjetoES {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					ProjetoES window = new ProjetoES();
+					GUI window = new GUI();
 					window.frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -34,7 +36,7 @@ public class ProjetoES {
 	/**
 	 * Create the application.
 	 */
-	public ProjetoES() {
+	public GUI() {
 		initialize();
 	}
 
@@ -64,6 +66,10 @@ public class ProjetoES {
 		
 		JButton btnMakeComparison = new JButton("Make Comparison");
 		frame.getContentPane().add(btnMakeComparison, BorderLayout.SOUTH);
+		
+		String[] metrics = {"Choose metric","LOC", "CYCLO", "ATFD", "LAA"};
+		JComboBox mlist = new JComboBox(metrics);
+		frame.getContentPane().add(mlist, BorderLayout.WEST);
 		
 	}
 

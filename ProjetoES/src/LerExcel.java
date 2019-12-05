@@ -1,14 +1,14 @@
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.Iterator;
 
-import org.apache.poi.ss.usermodel.Cell;
-import org.apache.poi.ss.usermodel.Row;
-import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+import org.apache.poi.xssf.usermodel.XSSFSheet;
 
+import com.sun.rowset.internal.Row;
+
+import javafx.scene.control.Cell;
 
 
 public class LerExcel {
@@ -24,15 +24,15 @@ public class LerExcel {
 		XSSFSheet folha = workbook.getSheetAt(0);
 		
 		//Iterar nas linhas
-		Iterator<Row> rowIt = folha.iterator();
+		Iterator<org.apache.poi.ss.usermodel.Row> rowIt = folha.iterator();
 		
 		while(rowIt.hasNext()) {
-			Row row = rowIt.next();
+			org.apache.poi.ss.usermodel.Row row = rowIt.next();
 		//Iterar celulas da mesma linha
-			Iterator<Cell> cellIterator = row.cellIterator();
+			Iterator<org.apache.poi.ss.usermodel.Cell> cellIterator = row.cellIterator();
 			
 			while(cellIterator.hasNext()) {
-				Cell cell = cellIterator.next();
+				org.apache.poi.ss.usermodel.Cell cell = cellIterator.next();
 				System.out.print(cell.toString() + ";");
 			}
 			System.out.println();
