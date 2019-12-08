@@ -1,6 +1,7 @@
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Iterator;
 
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
@@ -12,7 +13,6 @@ import javafx.scene.control.Cell;
 
 
 public class LerExcel {
-
 	public static void main(String[] args) throws IOException {
 		File excel = new File("Long-Method.xlsx");
 		FileInputStream fis = new FileInputStream (excel);
@@ -33,13 +33,16 @@ public class LerExcel {
 			
 			while(cellIterator.hasNext()) {
 				org.apache.poi.ss.usermodel.Cell cell = cellIterator.next();
-				System.out.print(cell.toString() + ";");
+				System.out.print(cell.toString() + ";");	
 			}
+			
 			System.out.println();
 		}
+		
 		workbook.close();
 		fis.close();
 	}
+	
 }
 
 
