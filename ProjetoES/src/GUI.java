@@ -30,6 +30,8 @@ import javax.swing.JTextArea;
 public class GUI {
 
 	private JFrame frame;
+	private JTextField textField;
+	private JTextField textField_1;
 
 	/**
 	 * Launch the application.
@@ -85,13 +87,19 @@ public class GUI {
 		
 		
 		JComboBox cbox1 = new JComboBox();
+		cbox1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				//aqui é suposto ir buscar o valor que esta no excel
+				
+			}
+		});
 		cbox1.setToolTipText("Metricas");
 		cbox1.setBounds(12, 102, 127, 22);
 		cbox1.setEditable(true);
 		cbox1.addItem("LOC");
 		cbox1.addItem("CYCLO");
-		cbox1.addItem("ATFD");
-		cbox1.addItem("LAA");
+		//cbox1.addItem("ATFD");
+		//cbox1.addItem("LAA");
 		cbox1.setSelectedItem(null);
 		frame.getContentPane().add(cbox1);
 		
@@ -106,20 +114,36 @@ public class GUI {
 		cbox2.setSelectedItem(null);
 		frame.getContentPane().add(cbox2);
 		
-		JRadioButton rdbtnNewRadioButton = new JRadioButton("is_feature_envy");
-		rdbtnNewRadioButton.setBounds(44, 41, 127, 25);
-		frame.getContentPane().add(rdbtnNewRadioButton);
+		JRadioButton ife = new JRadioButton("is_feature_envy");
+		JRadioButton ilm = new JRadioButton("is_long_method");
+		ilm.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				if(ilm.isSelected())
+					ife.setSelected(false);
+			}
+		});
+		ilm.setBounds(369, 50, 127, 25);
+		frame.getContentPane().add(ilm);
 		
-		JRadioButton rdbtnLong = new JRadioButton("is_long_method");
-		rdbtnLong.setBounds(369, 50, 127, 25);
-		frame.getContentPane().add(rdbtnLong);
+		ife.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				if(ife.isSelected())
+					ilm.setSelected(false);
+			}
+		});
+		ife.setBounds(44, 41, 127, 25);
+		frame.getContentPane().add(ife);
 		
 		JComboBox cbox3 = new JComboBox();
+		cbox3.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
 		cbox3.setToolTipText("");
 		cbox3.setBounds(12, 260, 127, 22);
 		cbox3.setEditable(true);
-		cbox3.addItem("LOC");
-		cbox3.addItem("CYCLO");
+		//cbox3.addItem("LOC");
+		//cbox3.addItem("CYCLO");
 		cbox3.addItem("ATFD");
 		cbox3.addItem("LAA");
 		cbox3.setSelectedItem(null);
@@ -135,6 +159,7 @@ public class GUI {
 		cbox4.setSelectedItem(null);
 		frame.getContentPane().add(cbox4);
 		
+		
 		JComboBox cbox5 = new JComboBox();
 		cbox5.setToolTipText("");
 		cbox5.setBounds(253, 184, 46, 22);
@@ -144,16 +169,16 @@ public class GUI {
 		cbox5.setSelectedItem(null);
 		frame.getContentPane().add(cbox5);
 		
-		JTextArea valor1 = new JTextArea();
-		valor1.setBounds(413, 260, 83, 22);
-		String value1 = valor1.getName();
-		frame.getContentPane().add(valor1);
 		
-		JTextArea valor2 = new JTextArea();
-		valor2.setBounds(413, 102, 101, 25);
-		String value2 = valor2.getName();
-		frame.getContentPane().add(valor2);
+		textField = new JTextField();
+		textField.setBounds(413, 102, 116, 22);
+		frame.getContentPane().add(textField);
+		textField.setColumns(10);
 		
+		textField_1 = new JTextField();
+		textField_1.setBounds(413, 260, 116, 22);
+		frame.getContentPane().add(textField_1);
+		textField_1.setColumns(10);
 		
 		
 		JButton detectar_defeitos = new JButton("detectar defeitos");
@@ -164,12 +189,23 @@ public class GUI {
 		detectar_defeitos.setFont(new Font("Tahoma", Font.PLAIN, 13));
 		detectar_defeitos.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				LerExcel le = new LerExcel();	
-				//le.is_long_(10,Integer.parseInt(value1));
-					
+				LerExcel le = new LerExcel();
+				if (ilm.isSelected()) {
+					ife.setSelected(false);
+					int v1 = Integer.parseInt(textField.getText());	
+					int v2 = Integer.parseInt(textField_1.getText());
+					System.out.println("is_long_method is " +le.ilm_check(140, 30, v1, v2));
+				}
+				else if(ife.isSelected()) {
+					ilm.setSelected(false);
+					int v1 = Integer.parseInt(textField.getText());	
+					double v2 = Double.parseDouble(textField_1.getText());
+					System.out.println("is_feature_envy is " +le.ife_check(10, 0.2, v1, v2));
+				}
 			}
 		});
 		frame.getContentPane().add(detectar_defeitos);
+		
 		
 		
 		

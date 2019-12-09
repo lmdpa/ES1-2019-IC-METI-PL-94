@@ -43,6 +43,28 @@ public class LerExcel {
 		fis.close();
 	}
 	
+	
+	// tentativa de regra do is long
+	public boolean ilm_check(int LOC, int CYCLO,int max_LOC, int max_CYCLO) {
+		boolean is_long_method;
+		if( LOC >= max_LOC || CYCLO >= max_CYCLO ||  LOC >= max_LOC && CYCLO >= max_CYCLO )
+			is_long_method = true;
+		else
+			is_long_method = false;
+	return is_long_method;
+	}
+	
+	
+	//Esta regra ta fadjoca ( is feature
+	public boolean ife_check(int ATFD, double LAA,double max_ATFD, double max_LAA) {
+		boolean is_feature_envy;
+		if( ATFD >= max_ATFD || LAA < max_LAA ||  ATFD > max_ATFD && LAA < max_LAA )
+			is_feature_envy = true;
+		else
+			is_feature_envy = false;
+	return is_feature_envy;
+	}
+	
 }
 
 
