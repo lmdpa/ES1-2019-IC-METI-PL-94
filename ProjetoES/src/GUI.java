@@ -11,12 +11,16 @@ import java.awt.Desktop;
 import java.awt.event.ActionListener;
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.awt.event.ActionEvent;
 import java.awt.Font;
 import java.awt.Color;
 import javax.swing.SwingConstants;
 import java.awt.Dialog.ModalExclusionType;
 import javax.swing.UIManager;
+
+import com.sun.xml.bind.v2.schemagen.xmlschema.List;
+
 import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.Cursor;
@@ -32,6 +36,7 @@ public class GUI {
 	private JFrame frame;
 	private JTextField textField;
 	private JTextField textField_1;
+	private ArrayList<Regra> regras = new ArrayList<Regra>();
 
 	/**
 	 * Launch the application.
@@ -61,7 +66,7 @@ public class GUI {
 	 */
 	private void initialize() {
 		frame = new JFrame();
-		frame.setBounds(100, 100, 777, 531);
+		frame.setBounds(100, 100, 777, 567);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
 		JButton show_excel = new JButton("Show Excel");
@@ -106,7 +111,7 @@ public class GUI {
 		
 		JComboBox cbox3 = new JComboBox();
 		cbox3.setToolTipText("");
-		cbox3.setBounds(310, 247, 105, 33);
+		cbox3.setBounds(316, 226, 105, 33);
 		cbox3.setEditable(true);
 		cbox3.addItem("OR");
 		cbox3.addItem("AND");
@@ -116,7 +121,7 @@ public class GUI {
 		JComboBox cbox4 = new JComboBox();
 		cbox4.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		cbox4.setToolTipText("");
-		cbox4.setBounds(50, 342, 130, 39);
+		cbox4.setBounds(50, 292, 130, 39);
 		cbox4.setEditable(true);
 		cbox4.setSelectedItem("metrica 2");
 		frame.getContentPane().add(cbox4);
@@ -125,7 +130,7 @@ public class GUI {
 
 		
 		JComboBox cbox5 = new JComboBox();
-		cbox5.setBounds(345, 329, 41, 22);
+		cbox5.setBounds(345, 301, 41, 22);
 		cbox5.setEditable(true);
 		cbox5.addItem(">");
 		cbox5.addItem("<");
@@ -139,7 +144,7 @@ public class GUI {
 		textField.setColumns(10);
 		
 		textField_1 = new JTextField();
-		textField_1.setBounds(557, 343, 130, 39);
+		textField_1.setBounds(557, 293, 130, 39);
 		frame.getContentPane().add(textField_1);
 		textField_1.setColumns(10);
 		
@@ -175,12 +180,17 @@ public class GUI {
 		frame.getContentPane().add(ife);
 		
 		
-		
+		JComboBox exists = new JComboBox();
+		exists.setBounds(60, 390, 105, 33);
+		frame.getContentPane().add(exists);
+		exists.addItem("TRUE");
+		exists.addItem("FALSE");
+		exists.setSelectedItem(null);
 		
 		
 		
 		JButton criar_regra = new JButton("criar regra");
-		criar_regra.setBounds(294, 416, 138, 47);
+		criar_regra.setBounds(294, 473, 138, 47);
 		criar_regra.setBorder(UIManager.getBorder("Button.border"));
 		criar_regra.setCursor(Cursor.getPredefinedCursor(Cursor.DEFAULT_CURSOR));
 		criar_regra.setPreferredSize(new Dimension(40, 25));
@@ -188,56 +198,39 @@ public class GUI {
 		
 		criar_regra.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				LerExcel le = new LerExcel();
 				String metrica1 = (String)cbox1.getSelectedItem();
 				String comparador1 = (String)cbox2.getSelectedItem();
-				String and_or = (String)cbox3.getSelectedItem();
+				String operador = (String)cbox3.getSelectedItem();
 				String metrica2 = (String)cbox4.getSelectedItem();
 				String comparador2 = (String)cbox5.getSelectedItem();
 				int v1 = Integer.parseInt(textField.getText());	
-//				int loc;
-//				int cyclo;
-//				int atfd;
-//				double laa;
+				int v2 = Integer.parseInt(textField_1.getText());
+				boolean ex;
+				if(exists.getSelectedItem().equals("TRUE")) 
+					ex = true;
+				else ex = false;
 				
-				if(metrica1.equals("LOC") && comparador1.equals(">") && and_or.equals("AND") && metrica2.equals("CYCLO") && comparador2.equals(">")){
-					System.out.println(" Regra para testar is_long_method criada");
-					int v2 = Integer.parseInt(textField_1.getText());	
-					System.out.println("threshold da métrica 1 : " + v1);
-					System.out.println("threshold da métrica 2 : " + v2);
-					//le.ilm_regra1(loc, cyclo, v1, v2);
-				}
-				else if(metrica1.equals("LOC") && comparador1.equals(">") && and_or.equals("OR") && metrica2.equals("CYCLO") && comparador2.equals(">")){
-					System.out.println("Regra para testar is_long_method criada");
-					int v2 = Integer.parseInt(textField_1.getText());	
-					System.out.println("threshold da métrica 1 : " + v1);
-					System.out.println("threshold da métrica 2 : " + v2);
-					//le.ilm_regra2(loc, cyclo, v1, v2);
-					
+				
+				if(ilm.isSelected()) {
+				Regra regra1 = new Regra(ilm.getName(),metrica1,metrica2,v1,v2,comparador1,comparador2,operador, ex);
+				regras.add(regra1);
+				System.out.println("Regra para testar is_long_method criada: " + regra1.toString());
+				System.out.println( "SE ( " + metrica1 + " " + comparador1 +" " + " " + v1 + " " + operador + " " + metrica2 + " " + comparador2 + " " +  v2 + " ) Então is_long_method = " + ex);
+				}		
+				
+				else if(ife.isSelected()) {
+					//Double vd2= Double.parseDouble(textField_1.getText());
+					//v2 = vd2.intValue();
+					Regra regra2 = new Regra(ilm.getName(),metrica1,metrica2,v1,v2,comparador1,comparador2,operador, ex);
+					regras.add(regra2);
+					System.out.println("Regra para testar is_feature_envy criada: " + regra2.toString());
+					System.out.println( "SE ( " + metrica1 + " " + comparador1 +" " + " " + v1 + " " + operador + " " + metrica2 + " " + comparador2 + " " +  v2 + " ) Então is_feature_envy = " + ex);
+
 				}
 				
-				else if(metrica1.equals("ATFD") && comparador1.equals(">") && and_or.equals("AND") && metrica2.equals("LAA") && comparador2.equals("<")){
-					System.out.println("Regra para testar is_feature_envy criada");
-					Double vd2= Double.parseDouble(textField_1.getText());
-					System.out.println("threshold da métrica 1 : " + v1);
-					System.out.println("threshold da métrica 2 : " + vd2);
-					//le.ife_regra1(atfd, laa, v1, vd2);
-					
-				}
-				else if(metrica1.equals("ATFD") && comparador1.equals(">") && and_or.equals("OR") && metrica2.equals("LAA") && comparador2.equals("<")){
-					System.out.println("Regra para testar is_feature_envy criada");
-					Double vd2= Double.parseDouble(textField_1.getText());
-					System.out.println("threshold da métrica 1 : " + v1);
-					System.out.println("threshold da métrica 2 : " + vd2);
-					//le.ife_regra2(atfd, laa, v1, vd2);
-			
-				}
-			}
+		}
 		});
 		frame.getContentPane().add(criar_regra);
-		
-		
-		
 		
 		
 	}
