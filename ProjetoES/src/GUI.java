@@ -1,4 +1,4 @@
- import java.awt.EventQueue;
+ import java.awt.EventQueue; 
 
 import javax.swing.JFrame;
 import javax.swing.JTable;
@@ -78,8 +78,8 @@ public class GUI {
 				File excel = new File("Long-Method.xlsx");
 				try {
 					Desktop.getDesktop().open(excel);
-					LerExcel le = new LerExcel();
-					le.main(null);
+					Excel le = new Excel(excel);
+
 				} catch (IOException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
@@ -215,7 +215,7 @@ public class GUI {
 				Regra regra1 = new Regra(ilm.getName(),metrica1,metrica2,v1,v2,comparador1,comparador2,operador, ex);
 				regras.add(regra1);
 				System.out.println("Regra para testar is_long_method criada: " + regra1.toString());
-				System.out.println( "SE ( " + metrica1 + " " + comparador1 +" " + " " + v1 + " " + operador + " " + metrica2 + " " + comparador2 + " " +  v2 + " ) Então is_long_method = " + ex);
+				System.out.println( "SE ( " + metrica1 + " " + comparador1 +" " + " " + v1 + " " + operador + " " + metrica2 + " " + comparador2 + " " +  v2 + " ) Entï¿½o is_long_method = " + ex);
 				}		
 				
 				else if(ife.isSelected()) {
@@ -224,7 +224,7 @@ public class GUI {
 					Regra regra2 = new Regra(ilm.getName(),metrica1,metrica2,v1,v2,comparador1,comparador2,operador, ex);
 					regras.add(regra2);
 					System.out.println("Regra para testar is_feature_envy criada: " + regra2.toString());
-					System.out.println( "SE ( " + metrica1 + " " + comparador1 +" " + " " + v1 + " " + operador + " " + metrica2 + " " + comparador2 + " " +  v2 + " ) Então is_feature_envy = " + ex);
+					System.out.println( "SE ( " + metrica1 + " " + comparador1 +" " + " " + v1 + " " + operador + " " + metrica2 + " " + comparador2 + " " +  v2 + " ) Entï¿½o is_feature_envy = " + ex);
 
 				}
 				
