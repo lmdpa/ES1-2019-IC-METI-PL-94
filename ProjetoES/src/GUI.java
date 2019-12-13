@@ -31,6 +31,15 @@ import javax.swing.JRadioButton;
 import javax.swing.JTextPane;
 import javax.swing.JTextArea;
 
+/**
+ * 
+ * 
+ * 
+ * @author carlo
+ *
+ */
+
+
 public class GUI {
 
 	private JFrame frame;
@@ -90,6 +99,10 @@ public class GUI {
 		frame.getContentPane().setLayout(null);
 		frame.getContentPane().add(show_excel);
 		
+		/**
+		 * Jcombo Box onde o utilizador seleciona a métrica a ser testada
+		 */
+		
 		
 		JComboBox cbox1 = new JComboBox();
 		cbox1.setFont(new Font("Tahoma", Font.PLAIN, 16));
@@ -99,6 +112,9 @@ public class GUI {
 		cbox1.setSelectedItem("metrica 1");
 		frame.getContentPane().add(cbox1);
 		
+		/**
+		 * Jcombo box onde o utilizador seleciona o comparador lógico a ser aplicado
+		 */
 		
 		JComboBox cbox2 = new JComboBox();
 		cbox2.setBounds(345, 165, 41, 22);
@@ -108,6 +124,9 @@ public class GUI {
 		cbox2.setSelectedItem(null);
 		frame.getContentPane().add(cbox2);
 		
+		/**
+		 * Jcombo box onde o utilizador seleciona o operador lógico a ser aplicado
+		 */
 		
 		JComboBox cbox3 = new JComboBox();
 		cbox3.setToolTipText("");
@@ -118,6 +137,10 @@ public class GUI {
 		cbox3.setSelectedItem(null);
 		frame.getContentPane().add(cbox3);
 		
+		/**
+		 * Jcombo box onde o utilizador seleciona a segunda métrica a ser testada
+		 */
+		
 		JComboBox cbox4 = new JComboBox();
 		cbox4.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		cbox4.setToolTipText("");
@@ -126,7 +149,9 @@ public class GUI {
 		cbox4.setSelectedItem("metrica 2");
 		frame.getContentPane().add(cbox4);
 		
-		
+		/**
+		 * Jcombo box onde o utilizador seleciona o segundo comparador lógico a ser aplicado
+		 */
 
 		
 		JComboBox cbox5 = new JComboBox();
@@ -136,6 +161,10 @@ public class GUI {
 		cbox5.addItem("<");
 		cbox5.setSelectedItem(null);
 		frame.getContentPane().add(cbox5);
+		
+		/**
+		 * JTextFields onde o utilizador introduz os Tresholds pretendidos
+		 */
 		
 		
 		textField = new JTextField();
@@ -148,6 +177,10 @@ public class GUI {
 		frame.getContentPane().add(textField_1);
 		textField_1.setColumns(10);
 		
+		/**
+		 * O Utilizador seleciona a que deifeito é aplicada a regra que criou
+		 * Conforme a sua escolha, a lista de métricas possíveis é reduzida às duas métricas que definem esse defeito
+		 */
 		
 		JRadioButton ife = new JRadioButton("is_feature_envy");
 		ife.setFont(new Font("Tahoma", Font.PLAIN, 16));
@@ -179,6 +212,9 @@ public class GUI {
 		ife.setBounds(50, 77, 154, 58);
 		frame.getContentPane().add(ife);
 		
+		/**
+		 * Utilizador seleciona a consequência da regra que criou
+		 */
 		
 		JComboBox exists = new JComboBox();
 		exists.setBounds(60, 390, 105, 33);
@@ -187,7 +223,10 @@ public class GUI {
 		exists.addItem("FALSE");
 		exists.setSelectedItem(null);
 		
-		
+		/**
+		 * JButton para o utilizador criar a regra
+		 * 
+		 */
 		
 		JButton criar_regra = new JButton("criar regra");
 		criar_regra.setBounds(294, 473, 138, 47);
@@ -195,6 +234,11 @@ public class GUI {
 		criar_regra.setCursor(Cursor.getPredefinedCursor(Cursor.DEFAULT_CURSOR));
 		criar_regra.setPreferredSize(new Dimension(40, 25));
 		criar_regra.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		
+/**
+ * Guarda os parametros escolhidos pelo utilizador e guarda-o numa estrutura de dados. Uma lista de Objetos do tipo Regra.
+ */
+		
 		
 		criar_regra.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
