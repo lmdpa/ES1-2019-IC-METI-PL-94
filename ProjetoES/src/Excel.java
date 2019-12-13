@@ -7,7 +7,12 @@
 	import org.apache.poi.ss.usermodel.Cell;
 	import org.apache.poi.xssf.usermodel.XSSFSheet;
 	import org.apache.poi.xssf.usermodel.XSSFWorkbook;
-
+/**
+ * Esta classe foi feita para colocar o excel numa matriz, de modo a facilitar a sua iteração e
+ * utilizacao dos seus valores para fazermos o solicitado no enunciado.
+ * @author Leonardo Piorla
+ *
+ */
 	public class Excel {
 		private File excel;
 
@@ -15,6 +20,17 @@
 			excel = new File("Long-Method.xlsx");
 				
 		}
+		/**Este metodo foi criado para passar o excel para uma matriz.
+		 * Usamos para isso funcoes do Apache de forma a que consigamos trabalhar sobre o excel fornecido.
+		 * Primeiramente vamos buscar o ficheiro excel. De seguida a primeira e única folha do ficheiro.
+		 * Depois associamos a duas variaveis de inteiros os valores das lninhas e das colunas e criamos uma matriz
+		 * de celulas com o tamanho armazenado nessas variaveis.
+		 * Por ultimo percorremos o nosso excel e adicionamos o valor de cada celula na respetiva
+		 * posicao da sua matriz.
+		 * @return Uma matriz composta pelas celulas existentes no nosso ficheiro excel.
+		 * @throws InvalidFormatException exeção
+		 * @throws IOException exeção
+		 */
 		public Cell [][] passarMatriz() throws InvalidFormatException, IOException {
 			//Ir buscar o ficheiro Excel
 			XSSFWorkbook workbook = new XSSFWorkbook(excel);		
@@ -32,4 +48,14 @@
 			
 		}
 		
+		public static void main(String[] args) throws InvalidFormatException, IOException {
+			File f = new File("Long-Method.xlsx");
+			Excel excel = new Excel(f);
+			Cell[][] cell= excel.passarMatriz();
+			System.out.println(excel.passarMatriz());
+			Tresholds t = new Tresholds(523, 2, 4);
+			Tresholds z = new Tresholds(0, 1, 4);
+			Detection d= new Detection(t,z,0,"nome");
+			System.out.println(d.detectionOu(cell[14]));
+		}
 	}
