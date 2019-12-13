@@ -19,7 +19,7 @@ import javax.swing.SwingConstants;
 import java.awt.Dialog.ModalExclusionType;
 import javax.swing.UIManager;
 
-import com.sun.xml.bind.v2.schemagen.xmlschema.List;
+//import com.sun.xml.bind.v2.schemagen.xmlschema.List;
 
 import java.awt.Component;
 import java.awt.Dimension;
