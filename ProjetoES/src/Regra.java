@@ -9,7 +9,7 @@ public class Regra {
 	private String comparador1;
 	private String comparador2;// > ou <
 	private String operador; // AND ou OR
-	private boolean exists; // se o erro existe ou não
+	private boolean exists; // se o erro existe ou nao
 	
 
 	
