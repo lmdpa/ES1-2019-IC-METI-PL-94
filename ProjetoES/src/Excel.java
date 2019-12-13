@@ -45,17 +45,8 @@
 				}
 			}
 			return matriz;
-			
 		}
 		
-		public static void main(String[] args) throws InvalidFormatException, IOException {
-			File f = new File("Long-Method.xlsx");
-			Excel excel = new Excel(f);
-			Cell[][] cell= excel.passarMatriz();
-			System.out.println(excel.passarMatriz());
-			Tresholds t = new Tresholds(523, 2, 4);
-			Tresholds z = new Tresholds(0, 1, 4);
-			Detection d= new Detection(t,z,0,"nome");
-			System.out.println(d.detectionOu(cell[14]));
-		}
+		
+		
 	}
